@@ -19,3 +19,7 @@ Each master prompt is stored as a separate Markdown file in the [`prompts/`](./p
 1. Open the desired prompt file.
 2. Copy its full content.
 3. Paste it into your AI assistant of choice, along with any required input (e.g. your own document).
+
+## Contributors
+
+- [@eboekenh](https://github.com/eboekenh)
