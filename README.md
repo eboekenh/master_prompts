@@ -12,7 +12,7 @@ Each master prompt is stored as a separate Markdown file in the [`prompts/`](./p
 
 ## Prompts
 
-- [`interview-keyword-cheatsheet.md`](./prompts/interview-keyword-cheatsheet.md) — Turns a prepared interview-answer document into a short keyword-chain cheat sheet (for oral recall practice) and a matching A4 poster text, output in German.
+- [`interview-memorization-sheet.md`](./prompts/interview-memorization-sheet.md) — Turns a prepared interview-answer document into a short keyword-chain memorization sheet (for oral recall practice) and a matching A4 poster text, output in German.
 
 ## Usage
 
