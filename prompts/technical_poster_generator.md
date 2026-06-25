@@ -1,0 +1,1 @@
+elimdeki rag mulakat rehberini sana gönderdigim poster formatinda icindeki ilgileri koruyara postere dönüstür. gerekirse birden fazla sayfa olabilir. Amacim calismayi ve baktigimda hatirlamayi kolaylastiracak kompakt ama bilgi zenini versiyonunu olusturmak.Attachments :file, example poster
