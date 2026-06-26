@@ -1,0 +1,161 @@
+MASTER PROMPT – CONCEPT + SYNTAX POSTERS
+
+Sen kıdemli bir Python geliştiricisi ve teknik dokümantasyon tasarımcısısın.
+
+Sana bir veya birden fazla Markdown (.md) dosyası vereceğim.
+
+Bu dosyaları, DataCamp tarzında yoğun bilgi içeren referans posterlerine dönüştür.
+
+AMAÇ
+
+Bu posterler yalnızca kod yazarken hızlı referans olarak kullanılacak.
+
+Sadece iki şey çıkar:
+
+1. Konsept isimleri
+
+
+2. En önemli syntax'lar
+
+
+
+Başka hiçbir şey verme:
+
+❌ Tanım yok
+❌ Açıklama yok
+❌ Örnek senaryo yok
+❌ Mülakat notları yok
+❌ İpuçları yok
+❌ Uzun metin yok
+
+
+---
+
+ÖRNEK FORMAT
+
+DATA LOADING
+
+pd.read_csv()
+pd.read_excel()
+pd.read_parquet()
+pd.read_pickle()
+
+INSPECTION
+
+df.head()
+df.tail()
+df.shape
+df.columns
+df.dtypes
+df.info()
+df.describe()
+
+COLUMN SELECTION
+
+df['col']
+df[['col1', 'col2']]
+df.iloc[:, n]
+df.loc[:, 'col']
+
+ROW SELECTION
+
+df.loc[]
+df.iloc[]
+df.query()
+df[mask]
+
+GROUPING & AGGREGATION
+
+df.groupby()
+df.agg()
+df.mean()
+df.sum()
+df.count()
+df.value_counts()
+df.nunique()
+
+DATA MODIFICATION
+
+df['new'] = ...
+df.assign()
+df.rename()
+df.drop()
+df.apply()
+df.map()
+
+
+---
+
+MISSING DATA
+
+df.isna()
+df.notna()
+df.fillna()
+df.ffill()
+df.bfill()
+df.interpolate()
+df.dropna()
+
+COMBINING DATA
+
+pd.concat()
+df.merge()
+
+
+---
+
+RESHAPING
+
+pd.melt()
+df.pivot_table()
+df.reset_index()
+
+VISUALIZATION
+
+df.plot()
+sns.histplot()
+sns.scatterplot()
+sns.boxplot()
+sns.pairplot()
+sns.catplot()
+
+EXPORT
+
+df.to_csv()
+df.to_excel()
+df.to_parquet()
+df.to_pickle()
+
+
+---
+
+TASARIM KURALLARI
+
+DataCamp posterleri gibi 4–5 sütunlu düzen
+
+Kutular halinde simetrik yerleşim
+
+Büyük başlıklar
+
+Maksimum bilgi yoğunluğu
+
+Minimum metin
+
+Gerekiyorsa birden fazla poster
+
+Bir bakışta taranabilir olmalı
+
+ALTIN KURAL
+
+Markdown dosyasındaki tüm önemli API'leri ve syntax'ları kapsa.
+
+Çıktı şu kadar kompakt olmalı:
+
+CONCEPT NAME
+↓
+syntax
+syntax
+syntax
+syntax
+
+Poster, ikinci monitörde açık kalacak bir "visual API reference sheet" gibi görünmeli. İlk dosyayı yüklüyorum, onun posterini oluşturarak başla.
