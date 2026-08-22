@@ -1,3 +1,5 @@
+1. komut (review icin)
+
 Sen teknik eğitim videoları, ekran kayıtları, kullanıcı deneyimi, video kurgusu ve öğretici içerik tasarımı konusunda uzman bir inceleme editörüsün.
 
 Görevin, yüklediğim teknik videoyu kapsamlı biçimde analiz etmek ve videonun izleyici açısından anlaşılır, teknik olarak doğru, takip edilebilir ve yayınlanabilir olup olmadığını değerlendirmek.
@@ -311,5 +313,244 @@ SON KURAL
 Ben ayrıca istemediğim sürece bütün videoyu baştan yazma, yeni bir video konsepti oluşturma veya mevcut anlatım metninin tamamını değiştirme.
 
 Ancak eksik, açıklamasız veya bilinçli olarak boş bırakılmış bölümler için eklenmesi gereken konuşma metinlerini mutlaka yaz.
+
+
+2. Komut
+
+Bu mesajla inceleme aşamasından uygulama ve düzeltme aşamasına geçiyoruz.
+
+Elindeki kaynaklar:
+
+* Orijinal video: `0822.mp4`
+* Altyazı dosyası: `0822(1).srt`
+* İnceleme raporu: `0822_video_inceleme_raporu.md`
+* Bu konuşmada daha önce verdiğim kapsamlı video inceleme ana komutu
+
+## ANA HEDEF
+
+İnceleme raporundaki bulguları yalnızca açıklama veya öneri olarak sunma. Kullanabildiğin dosya, ses, video ve kod araçlarıyla düzenlemeleri doğrudan video dosyasına uygula.
+
+Ardından düzeltilmiş videoyu, daha önce verdiğim kapsamlı video inceleme komutunun tamamını kullanarak yeniden incele.
+
+Yeni incelemede çözülmemiş veya düzenleme sonucunda oluşmuş sorunlar tespit edersen videoyu yeniden düzelt, yeniden oluştur ve tekrar incele.
+
+Bu döngüyü aşağıdaki yayın kabul kriterleri karşılanana veya en fazla dört düzenleme turu tamamlanana kadar sürdür.
+
+## ÇOK ÖNEMLİ İCRA KURALI
+
+Bana yalnızca:
+
+* “Şunları düzeltmelisiniz,”
+* “CapCut’ta şöyle yapabilirsiniz,”
+* bir kurgu planı,
+* bir FFmpeg komut listesi
+* veya yeni bir inceleme raporu
+
+vermekle yetinme.
+
+Gerçek video dosyasını düzenle ve oynatılabilir yeni bir MP4 dosyası üret.
+
+Bir işlemi gerçekten yapamıyorsan yapmış gibi davranma. Hangi aracın veya yetkinin eksik olduğunu açıkça belirt. Yapabildiğin diğer düzenlemeleri tamamlamaya devam et.
+
+Orijinal dosyaların üzerine yazma. Bütün işlemleri geri alınabilir ve sürümlendirilmiş biçimde yap.
+
+Videoyu herhangi bir platformda yayımlama veya dışarıya yükleme. Yalnızca düzenlenmiş dosyaları bana teslim et.
+
+## 1. BAŞLANGIÇ KONTROLÜ
+
+İşleme başlamadan önce:
+
+1. Kaynak videonun çözünürlüğünü, kare hızını, süresini, ses kanallarını ve kodeklerini kontrol et.
+2. Videonun ve altyazının erişilebilir ve sağlam olduğunu doğrula.
+3. İnceleme raporundaki bütün bulguları bir düzeltme listesine dönüştür.
+4. Her bulguyu mevcut videoda yeniden kontrol et. Raporu körü körüne uygulama.
+5. Zaman damgalarının orijinal videoya ait olduğunu unutma. Kesme işlemleri zamanları değiştirirse güncel bir zaman eşleme tablosu tut.
+
+Kaynak videoyu değiştirme. Düzenlemeleri ayrı bir çalışma kopyasında yap.
+
+## 2. UYGULANMASI GEREKEN TEMEL DÜZELTMELER
+
+Öncelikle rapordaki bütün P0 ve P1 bulgularını uygula.
+
+### Gizlilik düzeltmeleri
+
+* Yaklaşık `05:33–05:36` arasında görünen özel repo listelerini, PR başlıklarını ve gereksiz hesap bilgilerini kes veya güvenli biçimde bulanıklaştır.
+* Yaklaşık `06:39–06:43` arasında görünen tarayıcı arama geçmişini, otomatik tamamlama sonuçlarını ve kişisel bilgileri kes veya tamamen okunamaz hâle getirecek şekilde bulanıklaştır.
+* Videonun tamamını yeniden tarayarak raporda gözden kaçmış olabilecek e-posta adresi, kullanıcı bilgisi, özel proje adı, erişim anahtarı, API anahtarı, tarayıcı geçmişi ve kişisel veri olup olmadığını kontrol et.
+* Bulanıklaştırmanın ilgili bilgi ekranda kaldığı sürece doğru yerde ve yeterli güçte kaldığını kare kare doğrula.
+
+Mümkünse gizlilik bölümlerinde videonun zaman yapısını koruyacak bulanıklaştırma veya kadrajlama kullan. Kesme yaparsan sonraki bütün ses, görüntü ve altyazı zamanlarını güncelle.
+
+### Eksik anlatım ve sessizlikler
+
+Aşağıdaki metinleri rapordaki hazır taslaklar olarak kabul et. Önce görüntüyle ve mevcut anlatım tarzımla uyumlarını doğrula; gerekiyorsa anlamı koruyarak süreye göre kısalt.
+
+#### `00:56–01:11`
+
+Eklenecek geçici seslendirme:
+
+“Bu arada hesabımın arayüzü Almanca görünüyor. Siz muhtemelen Türkçe ya da İngilizce göreceksiniz. Merak etmeyin, menüler her dilde aynı yerde.”
+
+#### `05:39–06:09`
+
+Eklenecek geçici seslendirme:
+
+“Repo adı olarak ‘habit_tracker’ yazdım ama bu isim hesabımda daha önce kullanılmış. Bu yüzden adını ‘habit_tracker2’ olarak değiştiriyorum. Siz ilk kez oluşturuyorsanız muhtemelen bu uyarıyı görmeyeceksiniz. Bu örnekte görünürlüğü Public bırakıyorum ve Create repository seçeneğiyle devam ediyorum.”
+
+Ekrandaki README, `.gitignore` veya diğer ayarlar hakkında teknik bir iddia eklenecekse, bu iddiayı önce güncel ve resmî kaynaklardan doğrula.
+
+#### `07:22–07:40`
+
+Eklenecek geçici seslendirme:
+
+“Burada Netlify derleme ayarlarını gösteriyor. Tek bir HTML dosyası yayınladığımız için özel bir derleme komutu girmeden varsayılan ayarlarla devam ediyoruz. Deploy’a tıklayınca Netlify projeyi yayına almaya başlıyor. Bu işlem birkaç saniye sürebilir.”
+
+#### `06:59–07:21`
+
+Netlify’ın yapay zekâ aracılığıyla proje kurma paneli görüntüde kalıyorsa şu bilgiyi doğal bir boşluk oluşturarak ekle:
+
+“Burada yapay zekâyla proje kurma seçeneği de çıkıyor. Fakat uygulamayı zaten hazırladığımız için doğrudan GitHub bağlantısına geçiyoruz.”
+
+Mevcut konuşmanın üzerine ikinci bir ses bindirme. Uygun ses boşluğu oluşturulamıyorsa bu ilgisiz paneli kısaltarak görüntü ile mevcut anlatımı uyumlu hâle getir.
+
+### Diğer anlatım ve görsel düzeltmeleri
+
+* `03:24–03:27`: “Habit Tracker” adının “Habit Flow” olarak değişmesini gerekiyorsa kısa bir ekran yazısı veya uygun bir seslendirme ile açıkla.
+* `03:54–04:01`: Silme butonu hatasının ne olduğunu görüntüden kesin olarak tespit edebiliyorsan açıklamayı netleştir. Kanıtlanamayan teknik nedeni gerçekmiş gibi söyleme.
+* `06:39–06:41`: İlgisiz GitHub Copilot commit mesajını kes, hızlandır, kadrajla veya kapat.
+* `07:24–07:39`: Build settings alanlarını izleyicinin doldurması gerekiyormuş gibi görünmeyecek şekilde anlatımla eşleştir. Gerekirse ilgili alanlara kontrollü yakınlaştırma uygula.
+* `07:42–08:00`: Teknik olarak mümkünse canlı linki gerçek tarayıcıda açarak 2–3 saniye göster. Bunun için sahte tarayıcı görüntüsü üretme. Gerçek sayfaya erişemiyorsan bu maddeyi insan müdahalesi gerektiren unsur olarak kaydet.
+* `08:32–08:33`: Kayıt kalıntısı olan “tamam” sözünü ve sert siyah geçişi düzelt.
+* Videonun mevcut görsel tasarımına uygun, sade bir kapanış kartı ekle. Kapanışta “Bir sonraki bölüm: Veritabanı ekleme” ifadesi kullanılabilir. Gereksiz reklam veya abartılı CTA ekleme.
+
+## 3. GEÇİCİ TTS SESLENDİRME
+
+Eksik seslendirmeler için öncelikle Türkçe konuşabilen, doğal, sıcak fakat aşırı enerjik olmayan yetişkin bir kadın TTS sesi kullan.
+
+Seslendirme özellikleri:
+
+* Doğal ve öğretici
+* Sohbet eder gibi
+* Reklam tonu olmadan
+* Mevcut konuşmamın hızına yakın
+* Teknik kelimeleri anlaşılır telaffuz eden
+* “Gemini”, “Canvas”, “GitHub”, “Netlify”, “repository”, “HTML” ve “deploy” kelimelerini doğru okuyan
+
+Önce mevcut insan sesinin konuşma hızını, ortalama ses düzeyini ve tonunu analiz et. Geçici TTS sesini bunlara yakınlaştır; fakat mevcut videodaki sesimi taklit ettiğini veya bunun benim sesim olduğunu iddia etme.
+
+Her TTS parçasını ayrı bir WAV veya yüksek kaliteli ses dosyası olarak da sakla. Dosya adında zaman damgası ve `TEMP_TTS` ifadesi bulunsun.
+
+TTS parçalarını yerleştirirken:
+
+* Mevcut konuşmanın üzerine bindirme.
+* Kelime veya cümle başlarını kesme.
+* TTS ile mevcut ses arasında ani ses yüksekliği farkı bırakma.
+* Gerekirse kısa crossfade ve uygun oda sessizliği kullan.
+* Cümleyi süreye sığdırmak için anlaşılmayacak kadar hızlandırma.
+* Gerekirse görüntüyü kontrollü biçimde uzat, dondur veya hafifçe hızlandır.
+* Ses taşması, clipping, yankı veya belirgin dip gürültüsü oluşturma.
+* TTS eklenen bütün cümleleri altyazıya da ekle.
+
+### Kendi sesimi kullanma seçeneği
+
+Benim sesimin özel bir TTS modeli olarak kullanılabilmesi yalnızca kullandığın araç bunu gerçekten destekliyorsa, gerekli yetki mevcutsa ve resmî ses onayı süreci tamamlanabiliyorsa değerlendirilebilir.
+
+Orijinal videodaki sesimi tek başına alıp izinsiz biçimde klonlama. Bunu benim sesimmiş gibi sunma.
+
+Kendi sesimi oluşturmak için ayrı bir onay kaydı veya temiz ses örneği gerekiyorsa düzenleme sürecini durdurma. Geçici TTS ile çalışmayı tamamla ve sonunda benden hangi kaydın gerektiğini açıkça belirt.
+
+Ben açıkça onaylamadan sesimi üçüncü taraf bir servise gönderme.
+
+## 4. TEKNİK DOĞRULUK
+
+Yeni seslendirme metinlerinde veya ekran yazılarında yeni teknik iddialar eklemeden önce bunları güncel, resmî kaynaklarla doğrula.
+
+Özellikle şu konularda varsayım yapma:
+
+* GitHub repo görünürlüğünün zorunlu olup olmadığı
+* Netlify özelliklerinin ücretsiz veya ücretli olması
+* Netlify kredi sistemi
+* Build settings alanlarının bütün proje türlerinde boş bırakılabileceği
+* Silme butonu hatasının kesin teknik nedeni
+
+Yalnızca bu videodaki tek HTML dosyasından oluşan proje bağlamında doğru olan açıklamaları kullan.
+
+## 5. ALTYAZI
+
+Düzenleme sonrasında altyazı dosyasını baştan sona güncelle:
+
+* Eklenen TTS cümlelerini ekle.
+* Kesilen bölümlerin zamanlarını düzelt.
+* Otomatik transkripsiyondaki “ceminay”, “kanmas”, “gitaba”, “aroyüz” gibi yanlış yazımları gerçek kelimelerle değiştir.
+* Teknik marka ve terimleri doğru yaz: Gemini, Canvas, GitHub, Netlify, HTML, repository, deploy.
+* Altyazıların birbiriyle çakışmadığını ve konuşmayla senkron olduğunu doğrula.
+* Okuma süresi yetersiz olan altyazıları uygun biçimde böl.
+
+## 6. İTERATİF DÜZELTME VE KONTROL DÖNGÜSÜ
+
+Her düzenleme turunda şu sırayı izle:
+
+1. Düzeltmeleri gerçek video zaman çizelgesine uygula.
+2. Yeni bir kontrol sürümü oluştur.
+3. Oluşturduğun yeni videoyu baştan sona incele.
+4. Bu konuşmada daha önce verdiğim kapsamlı video inceleme ana komutunu yeni sürüm üzerinde yeniden uygula.
+5. Eski raporu tekrar sunmak yerine yeni videoyu bağımsız olarak değerlendir.
+6. Yeni bulunan bütün P0 ve P1 sorunlarını düzelt.
+7. Videoya zarar vermeden çözülebilen yararlı P2 sorunlarını da düzelt.
+8. Yeni bir kontrol sürümü oluşturup tekrar incele.
+9. Kabul kriterleri karşılanıyorsa döngüyü durdur.
+10. Karşılanmıyorsa bir sonraki tura geç.
+
+Her turu orijinal kaynak ve güncel kurgu zaman çizelgesi üzerinden oluştur. Önceki sıkıştırılmış MP4’ü tekrar tekrar kodlayarak görüntü kalitesini düşürme.
+
+İnceleme turları için düşük boyutlu kontrol kopyaları kullanılabilir. Yüksek kaliteli nihai videoyu kabul kriterleri sağlandıktan sonra bir kez oluştur.
+
+En fazla dört düzenleme ve kontrol turu gerçekleştir. Dördüncü tur sonunda çözülemeyen unsurlar varsa dur ve yalnızca gerçek engelleri zaman damgalarıyla bildir.
+
+## 7. YAYIN KABUL KRİTERLERİ
+
+Video ancak aşağıdaki koşulların tamamı sağlandığında “yayına hazır” kabul edilebilir:
+
+* Hiçbir P0 sorunu kalmamış olmalı.
+* Çözülebilir hiçbir P1 sorunu kalmamış olmalı.
+* Kişisel veya hassas bilgiler hiçbir karede okunabilir olmamalı.
+* Kritik bir hata, seçim veya teknik karar açıklamasız kalmamalı.
+* Konuşma ve ilgili ekran işlemi doğru zamanda eşleşmeli.
+* Birbiri üzerine binen iki konuşma bulunmamalı.
+* Eklenen seslerde kesilme, clipping veya rahatsız edici ses seviyesi farkı olmamalı.
+* Yeni teknik iddialar doğrulanmış olmalı.
+* Altyazılar güncel ve senkron olmalı.
+* Video baştan sona açılmalı, ileri-geri sarılabilmeli ve ses-görüntü senkronu korunmalı.
+* Beklenmeyen siyah kare, donmuş görüntü veya ani ses kopması bulunmamalı.
+* Nihai inceleme kararı “Bu hâliyle yayınlanabilir” olmalı.
+* Kalan P2 maddeleri yalnızca öznel veya isteğe bağlı estetik öneriler olmalı.
+
+“Kusursuz” ifadesini mutlak veya sınırsız bir hedef olarak yorumlama. Yukarıdaki ölçülebilir kabul kriterlerini kullan.
+
+## 8. NİHAİ DOSYALAR
+
+İşlem sonunda şu dosyaları teslim et:
+
+1. `0822_duzeltilmis_final.mp4`
+2. `0822_duzeltilmis_final.srt`
+3. Eklenen bütün geçici ses dosyaları
+4. `0822_voiceover_metni.md`
+5. `0822_duzenleme_gecmisi.md`
+6. `0822_final_inceleme_raporu.md`
+7. Varsa yalnızca insan müdahalesiyle çözülebilecek maddelerin kısa listesi
+
+Düzenleme geçmişinde her değişiklik için:
+
+* Orijinal zaman damgası
+* Yeni zaman damgası
+* Yapılan işlem
+* İşlemin gerekçesi
+* Kullanılan seslendirme metni
+* Son kontrol sonucu
+
+bulunsun.
+
+Son mesajında yalnızca “tamamlandı” deme. Nihai videonun gerçekten oluşturulduğunu ve teknik kontrolden geçtiğini doğrula; bütün dosyaları indirilebilir biçimde sun.
+
 
 Amacın, mevcut videodaki gerçek sorunları bulmak, eksik açıklamaları tamamlamak ve bana doğrudan uygulanabilir bir düzenleme ve seslendirme planı vermek.
