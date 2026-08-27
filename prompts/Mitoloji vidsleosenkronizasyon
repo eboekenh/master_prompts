@@ -1,0 +1,876 @@
+MİTOLOJİ VİDEOSU – OTOMATİK SENKRONİZASYON, KURGU, TRANSKRİPSİYON VE SES MİKSAJI MASTER PROMPTU
+
+Sen profesyonel bir video editörü, ses miksaj uzmanı, belgesel kurgucusu, görsel–işitsel senkronizasyon uzmanı ve post-prodüksiyon uzmanısın.
+
+Elimde anlatımlı bir mitoloji videosu var. Video büyük ölçüde hazırlanmış durumda; fakat uzun ve çok sayıda sahne içerdiği için bazı yerlerde:
+
+- Ses ile görüntü senkronize değil.
+- Anlatılan olayla ekranda görünen sahne uyuşmuyor.
+- Bazı görüntüler veya konuşmalar gereksiz şekilde tekrar ediyor.
+- Aynı cümle, fikir veya sahne iki kez kullanılmış olabiliyor.
+- Bazı geçişler gereğinden uzun veya kısa.
+- Bazı görüntüler anlatımdan önce ya da sonra geliyor.
+- Bazı bölümlerde arka plan müziği konuşmayı bastırıyor.
+- Bazı bölümlerde voice-over gereğinden fazla düşük veya yüksek.
+- Bazı ses geçişleri doğal değil.
+- Bazı kesmeler veya sahne geçişleri anlatının ritmini bozuyor.
+
+Görevin yalnızca sorunları tespit etmek veya bana rapor vermek DEĞİLDİR.
+
+Videoyu doğrudan düzelt.
+
+Eğer kullandığın ortam video dosyalarını ve timeline'ı düzenlemene izin veriyorsa, aşağıdaki işlemleri doğrudan videonun üzerinde gerçekleştir.
+
+---
+
+TEMEL HEDEF
+
+Videoyu:
+
+anlaşılır + dinamik + sinematik + senkronize + akıcı
+
+hale getir.
+
+Ancak videonun mevcut anlatım tarzını gereksiz yere değiştirme.
+
+Doğru çalışan bölümlere dokunma.
+
+---
+
+PASS 0 — VİDEODAN SESİ ÇIKAR, ANALİZ ET VE TIMESTAMP'Lİ TRANSKRİPT OLUŞTUR
+
+Video düzenlemeye başlamadan önce videonun sesini ayrı olarak çıkar ve analiz için kullanılabilir hale getir.
+
+Orijinal videoya veya orijinal ses dosyasına kesinlikle zarar verme.
+
+Mümkünse videodaki:
+
+- voice-over,
+- arka plan müziği,
+- sound effect,
+- ortam sesleri
+
+katmanlarını ayrı ayrı tespit et.
+
+Eğer bunlar timeline üzerinde zaten ayrı track'ler halinde bulunuyorsa mevcut track'leri kullan.
+
+Eğer bütün sesler tek audio track içine gömülmüşse, gerektiğinde audio separation / stem separation araçlarını kullanarak konuşma ile müziği mümkün olduğunca ayır.
+
+Kullanabileceğin araçlara örnek:
+
+- Whisper veya benzeri speech-to-text araçları,
+- FFmpeg veya benzeri audio extraction araçları,
+- Demucs,
+- UVR,
+- stem separation araçları,
+- ya da mevcut ortamda bu iş için daha başarılı başka bir araç.
+
+Belirli bir programa bağlı kalma.
+
+Elindeki araçlardan en güvenilir olanını seç.
+
+---
+
+0.1 — Videodan audio çıkar
+
+Videonun sesini analiz amacıyla ayrı bir audio dosyası olarak çıkar.
+
+Mümkünse:
+
+- kalite kaybı oluşturma,
+- gereksiz yeniden sıkıştırma yapma,
+- orijinal ses track'ini değiştirme.
+
+Analiz amacıyla gerekirse yüksek kaliteli bir WAV çalışma dosyası oluştur.
+
+Örneğin:
+
+"mitoloji_original_audio.wav"
+
+---
+
+0.2 — Voice-over'ı timestamp'li şekilde transkribe et
+
+Konuşmayı Whisper veya eşdeğer doğrulukta bir speech-to-text sistemiyle yazıya dök.
+
+Transkript mutlaka timestamp içermeli.
+
+Uzun paragraflar yerine mümkün olduğunca:
+
+başlangıç zamanı + bitiş zamanı + konuşulan cümle
+
+formatını kullan.
+
+Örneğin:
+
+00:12:14.200 → 00:12:19.800
+“Odysseus bunun üzerine adamlarına gemilere dönmelerini emretti.”
+
+00:12:19.800 → 00:12:26.400
+“Fakat adamları onun sözünü dinlemedi.”
+
+Mümkünse cümle veya anlamlı anlatım blokları seviyesinde timestamp üret.
+
+Bu transkript sonraki senkronizasyon işlemlerinin ana referanslarından biri olsun.
+
+---
+
+0.3 — Otomatik transkripsiyonu körü körüne doğru kabul etme
+
+Whisper veya başka bir sistem özellikle mitolojik isimlerde hata yapabilir.
+
+Özellikle:
+
+- Odysseus,
+- Poseidon,
+- Athena,
+- Kirke,
+- Kalypso,
+- Polyphemos,
+- Telemakhos,
+- Penelope,
+- Zeus
+
+gibi özel isimleri kontrol et.
+
+Transkripsiyon hatası senkronizasyon kararlarını etkiliyorsa sesi dinleyerek düzelt.
+
+Ancak voice-over metnini yeniden yazma veya anlatımı değiştirme.
+
+Amaç:
+
+mevcut voice-over'ın gerçekte ne söylediğini doğru belirlemek.
+
+---
+
+0.4 — Transkripti SENKRONİZASYON HARİTASI olarak kullan
+
+Her cümlenin veya anlatım bloğunun başlangıç ve bitiş zamanını belirledikten sonra mevcut görüntü timeline'ını bu haritayla karşılaştır.
+
+Her bölüm için şu soruyu sor:
+
+“Bu cümle bu zaman aralığında söyleniyor. İzleyici bu sırada anlatımı destekleyen doğru görüntüyü görüyor mu?”
+
+Sadece görüntünün başlangıç zamanına bakma.
+
+Cümlenin bütün süresini değerlendir.
+
+Örneğin Odysseus hakkında 8 saniyelik bir anlatım varsa fakat ilgili görsel yalnızca son 2 saniyede görünüyorsa bunu otomatik olarak doğru senkron kabul etme.
+
+Görüntüleri anlatının doğal başladığı noktaya göre düzenle.
+
+---
+
+0.5 — Voice-over ile müzik tek track ise mümkünse ayır
+
+Voice-over ve müzik tek audio track içine gömülmüşse ve miksajı doğru yapabilmek için ayrılmaları gerekiyorsa mümkün olduğunca şu stem'leri oluştur:
+
+- Dialogue / Voice
+- Music
+- Effects / Ambience
+
+Ancak separation işlemi voice-over'da:
+
+- metalik ses,
+- robotik artefakt,
+- yankı,
+- kelime kaybı,
+- ciddi kalite bozulması
+
+oluşturuyorsa bozuk stem'i final videoda kullanma.
+
+Bu durumda ayrıştırılmış dosyayı yalnızca analiz için kullan ve final miks için mümkün olan en temiz kaynağı koru.
+
+---
+
+0.6 — Çalışma dosyalarını ayrı tut
+
+Örneğin:
+
+"mitoloji_original_audio.wav"
+
+"mitoloji_voice_analysis.wav"
+
+"mitoloji_music_analysis.wav"
+
+"mitoloji_timestamped_transcript.txt"
+
+Orijinal kaynakların üzerine yazma.
+
+---
+
+PASS 1 — SES–GÖRÜNTÜ SENKRONİZASYONU
+
+Videoyu baştan sona incele.
+
+Voice-over'da söylenenlerle görüntüleri karşılaştır.
+
+Her cümle veya anlamlı anlatım bloğu için şu soruyu sor:
+
+“İzleyici şu anda duyduğu şeyi ekranda mantıklı bir şekilde görüyor mu?”
+
+Uyumsuzluk varsa:
+
+- ilgili görüntüyü doğru konuşmanın olduğu yere taşı,
+- görüntünün başlangıç ve bitiş zamanını ayarla,
+- gerekiyorsa görüntüyü kısalt,
+- gerekiyorsa görüntüyü uzat,
+- gereksiz beklemeleri kaldır,
+- sonraki görüntüye geçiş zamanını düzelt.
+
+Görüntü değişimleri mümkün olduğunca anlatımdaki anlam değişimleriyle örtüşsün.
+
+Ancak:
+
+Her cümlede görüntü değiştirmek zorunda değilsin.
+
+Gereksiz hızlı kurgu yapma.
+
+Bu bir mitoloji / hikâye anlatımı videosu olduğu için görüntülere gerektiğinde nefes alma alanı bırak.
+
+---
+
+Özellikle kontrol et
+
+Anlatımda:
+
+- kişi isimleri,
+- mitolojik karakterler,
+- mekanlar,
+- savaşlar,
+- yaratıklar,
+- gemiler,
+- deniz yolculukları,
+- tanrılar,
+- önemli olaylar
+
+geçtiğinde görüntünün anlatımı gerçekten desteklediğinden emin ol.
+
+---
+
+PASS 2 — GÖRSELİN ANLATIMLA SEMANTİK UYUMUNU KONTROL ET
+
+Sadece zamanlama değil, anlamsal uyumu da kontrol et.
+
+Örneğin:
+
+Poseidon anlatılırken Athena'nın uzun süre ekranda görünmesi gibi bir durum varsa düzelt.
+
+Görüntü birebir aynı olayı göstermese bile en azından:
+
+- aynı karakteri,
+- aynı mekanı,
+- aynı atmosferi,
+- aynı eylemi,
+- aynı duyguyu,
+- veya anlatılan olayın mantıklı bir görsel temsilini
+
+desteklemeli.
+
+---
+
+Yanlış karakterleri özellikle kontrol et
+
+Mitolojik karakterlerin birbirine karışmadığından emin ol.
+
+Örneğin:
+
+- Athena,
+- Poseidon,
+- Zeus,
+- Kirke,
+- Kalypso,
+- Penelope,
+- Telemakhos,
+- Odysseus
+
+gibi karakterler anlatımla uyuşmalı.
+
+---
+
+Kronolojiyi koru
+
+Mitolojik olayların sırasını mümkün olduğunca koru.
+
+Sonraki olayın görüntüsünü, anlatım henüz önceki olaydayken gereksiz yere gösterme.
+
+Ancak teaser veya bilinçli dramatik foreshadowing varsa bunu otomatik olarak hata kabul etme.
+
+---
+
+PASS 3 — TEKRARLARI BUL VE TEMİZLE
+
+Videoyu baştan sona tekrarlar açısından kontrol et.
+
+---
+
+Konuşma tekrarları
+
+Aynı cümle yanlışlıkla iki kez kullanılmışsa gereksiz olanı kaldır.
+
+---
+
+Bilgi tekrarları
+
+Cümleler birebir aynı olmasa bile aynı bilgi kısa aralıklarla gereksiz şekilde iki kez anlatılıyorsa değerlendir.
+
+Anlatının akışına zarar veren tekrarları kaldır.
+
+Ancak bilgi önemliyse veya ikinci kullanım dramatik bir işlev görüyorsa bırak.
+
+---
+
+Görüntü tekrarları
+
+Aynı klip veya neredeyse aynı görüntü kısa süre içinde gereksiz yere tekrar kullanılmışsa:
+
+- uygun başka görüntü varsa değiştir,
+- uygun alternatif yoksa mevcut görüntüyü kullanmanın en doğal yolunu bul,
+- tamamen gereksizse kaldır.
+
+---
+
+Bilinçli dramatik tekrarları koru
+
+Her tekrar hata değildir.
+
+Örneğin bir cümlenin veya görselin tekrar kullanılması:
+
+- gerilim oluşturuyorsa,
+- karakteri hatırlatıyorsa,
+- anlatı motifiyse,
+- dramatik etki yaratıyorsa
+
+otomatik olarak silme.
+
+---
+
+PASS 4 — KURGU RİTMİNİ DÜZELT
+
+Sahnelerin sürelerini anlatımın ritmine göre değerlendir.
+
+Şunları düzelt:
+
+- gereğinden uzun duran sabit görüntüler,
+- konuşma bitmesine rağmen devam eden görüntüler,
+- yeni konu başlamasına rağmen ekranda kalan eski sahne,
+- çok erken gelen görüntüler,
+- gereksiz boşluklar,
+- anlamsız sessizlikler,
+- doğal olmayan kesmeler,
+- ritmi bozan geçişler.
+
+Ancak videoyu gereksiz yere hızlandırma.
+
+Bu bir mitoloji / hikâye anlatımı videosu.
+
+Bazı sahnelerin atmosfer oluşturmak için birkaç saniye daha uzun kalması normaldir.
+
+Hedef:
+
+hızlı kurgu değil, akıcı kurgu.
+
+---
+
+PASS 5 — VOICE-OVER SESİNİ DİNAMİK OLARAK DÜZENLE
+
+Voice-over sesini video boyunca mekanik şekilde aynı seviyeye getirme.
+
+Kesinlikle her cümleyi aynı ses yüksekliğine normalize ederek tekdüze hale getirme.
+
+Amaç:
+
+doğal dramatik yapıyı korumak.
+
+---
+
+Voice-over sahnenin duygusuna göre değişebilir
+
+Örneğin:
+
+Sakin veya gizemli sahne
+
+Voice-over daha sakin ve yumuşak olabilir.
+
+Gerilim yükselirken
+
+Voice-over enerjisi kademeli olarak artabilir.
+
+Savaş / fırtına / kaçış / tanrıyla karşılaşma
+
+Voice-over daha güçlü hissedilebilir.
+
+Duygusal veya düşünsel bölüm
+
+Voice-over yeniden daha sakin olabilir.
+
+Bu doğal değişimleri yok etme.
+
+---
+
+Sadece gerçek ses problemlerini düzelt
+
+Örneğin:
+
+- sebepsiz ses düşüşü,
+- izleyicinin konuşmayı duyamaması,
+- ani ve istemsiz ses sıçramaları,
+- clipping,
+- distorsiyon,
+- bir cümlenin diğerlerinden anlamsız şekilde çok düşük olması.
+
+Hedef eşit ses değil, kontrollü dinamik ses.
+
+---
+
+PASS 6 — MÜZİĞİ ANLATININ DUYGUSUNA GÖRE DİNAMİK OLARAK MİKSLE
+
+Arka plan müziğini bütün video boyunca aynı seviyede tutma.
+
+Müzik hikâyenin dramatik yapısını takip etsin.
+
+---
+
+Örnek dinamik yapı
+
+Sakin anlatım
+
+Müzik daha düşük ve geri planda olabilir.
+
+Gizem
+
+Müzik yavaşça yükselebilir.
+
+Gerilim artıyor
+
+Müzik kademeli şekilde yükselebilir.
+
+Savaş / fırtına / kaçış
+
+Müzik belirgin şekilde güçlenebilir.
+
+Büyük anlatı zirvesi
+
+Hem voice-over hem müzik daha güçlü olabilir.
+
+Olay sonrasında
+
+Müzik doğal biçimde geri çekilebilir.
+
+---
+
+EN ÖNEMLİ SES KURALI
+
+Müzik ne kadar yükselirse yükselsin voice-over'ın anlaşılabilirliğini bozmamalıdır.
+
+Müzik ile anlatım birbirine karşı yarışmamalı.
+
+Birlikte yükselerek dramatik etki yaratabilirler.
+
+---
+
+DUCKING'İ MEKANİK UYGULAMA
+
+Her konuşma başladığında müziği otomatik olarak aynı miktarda düşürme.
+
+Bunun yerine sahnenin içeriğine göre karar ver.
+
+Örneğin dramatik bir sahnede:
+
+- voice-over biraz yükselebilir,
+- müzik de yükselebilir.
+
+Bu tamamen kabul edilebilir.
+
+Ancak müzik konuşmayı maskeliyorsa yalnızca gerektiği kadar geri çek.
+
+Eğer müzik zaten konuşmanın anlaşılmasını engellemiyorsa sırf konuşma başladığı için müziği otomatik olarak kısmak zorunda değilsin.
+
+---
+
+MÜZİK VE VOICE-OVER ÖNCELİK SIRASI
+
+1. Voice-over anlaşılır olmalı.
+2. Sahnenin dramatik enerjisi korunmalı.
+3. Müzik anlatıyı desteklemeli.
+4. Ses doğal şekilde yükselip alçalabilmeli.
+5. Video hiçbir zaman “her şey aynı seviyede” hissi vermemeli.
+
+---
+
+MÜZİĞİN SESİ ÇİĞNEMESİNİ ÖZELLİKLE KONTROL ET
+
+Şunları kontrol et:
+
+- müzik konuşmadaki kelimeleri maskeliyor mu?
+- bass voice-over'ı örtüyor mu?
+- vurmalı çalgılar kelimelerin anlaşılmasını zorlaştırıyor mu?
+- ani müzik yükselişleri voice-over'ı gömüyor mu?
+- dramatik zirveler gereğinden fazla bastırılmış mı?
+- sakin sahnelerde müzik gereğinden fazla yüksek mi?
+
+Gerekirse:
+
+- volume automation,
+- hafif ducking,
+- EQ,
+- dynamic EQ,
+- sidechain compression
+
+gibi yöntemlerden uygun olanı kullan.
+
+Ancak processing'i gereksiz yere agresif uygulama.
+
+---
+
+SES MİKSAJININ TEMEL PRENSİBİ
+
+Videonun sesini:
+
+normalize edilmiş + düz + tekdüze
+
+hale getirme.
+
+Hedef:
+
+dinamik + sinematik + anlaşılır
+
+bir miks.
+
+Ses seviyelerinin sahneden sahneye değişmesi hata değildir.
+
+Hata olan:
+
+- istemsiz seviye değişimi,
+- müziğin konuşmayı bastırması,
+- dramatik olmayan bir yerde gereksiz yüksek müzik,
+- dramatik zirvenin aşırı bastırılması,
+- voice-over'ın kaybolmasıdır.
+
+Her miks kararını önce:
+
+“Bu sahnenin duygusal amacı nedir?”
+
+sorusuna göre ver.
+
+---
+
+PASS 7 — EKSİK GÖRSELLERİ TESPİT ET
+
+Anlatılan bir bölüm için uygun görüntü bulunmuyorsa:
+
+1. Önce mevcut görüntüler arasında uygun alternatif ara.
+2. Uygun görüntü yoksa problemli kısmı işaretle.
+3. Hangi tür yeni görüntü gerektiğini açıkça belirt.
+
+Örneğin:
+
+00:18:42–00:18:51
+
+Gerekli görüntü:
+
+“Odysseus'un gemisinin Poseidon'un yarattığı büyük bir fırtınada savrulduğunu gösteren dramatik deniz sahnesi.”
+
+Yanlış görüntüyü sırf boşluk doldurmak için kullanma.
+
+---
+
+PASS 8 — ANLATI BÜTÜNLÜĞÜNÜ KORU
+
+Düzeltme yaparken hikâyenin anlamını değiştirme.
+
+Voice-over'daki önemli bilgileri sırf kurgu kolaylaşsın diye silme.
+
+Mitolojik olayların sırasını değiştirme.
+
+Bir kısmı kaldırmak bilgi kaybına yol açacaksa önce başka çözüm bul.
+
+---
+
+PASS 9 — DOĞRU ÇALIŞAN BÖLÜMLERE DOKUNMA
+
+Amaç bütün videoyu baştan yapmak değildir.
+
+Prensip:
+
+Sorunlu bölümü düzelt, iyi çalışan bölümü koru.
+
+Bir sahne zaten:
+
+- doğru senkronizeyse,
+- anlatımı destekliyorsa,
+- ritmi iyiyse,
+- ses dengesi uygunsa
+
+sırf farklı hale getirmek için değiştirme.
+
+---
+
+PASS 10 — FINAL QUALITY CONTROL
+
+Bütün düzenlemeler bittikten sonra videoyu tekrar BAŞTAN SONA kontrol et.
+
+Sadece değiştirdiğin bölümlere bakma.
+
+Final videoyu gerçek bir izleyici gibi izle.
+
+---
+
+SENKRON KONTROLÜ
+
+Sor:
+
+- Her voice-over bölümü doğru görüntüyle eşleşiyor mu?
+- Görüntü anlatımdan erken mi geliyor?
+- Görüntü geç mi geliyor?
+- Görsel yanlış karakteri mi gösteriyor?
+- Yanlış mekan var mı?
+- Yanlış olay gösteriliyor mu?
+
+---
+
+TEKRAR KONTROLÜ
+
+Sor:
+
+- Yanlışlıkla tekrar eden cümle var mı?
+- Aynı bilgi gereksiz tekrar edilmiş mi?
+- Aynı görüntü gereksiz tekrar ediyor mu?
+
+---
+
+KURGU KONTROLÜ
+
+Sor:
+
+- gereksiz uzun sahne var mı?
+- doğal olmayan cut var mı?
+- görüntü çok hızlı mı değişiyor?
+- görüntü gereksiz uzun mu kalıyor?
+- anlatının ritmi bozuluyor mu?
+
+---
+
+SES KONTROLÜ
+
+Sor:
+
+- herhangi bir yerde müzik konuşmayı bastırıyor mu?
+- voice-over herhangi bir yerde anlaşılmaz mı?
+- miks fazla düz hale gelmiş mi?
+- dramatik sahneler yeterince güçlü mü?
+- sakin sahneler yeterince sakin mi?
+- müzik ve voice-over gerektiğinde birlikte yükselebiliyor mu?
+- ani ve istemsiz volume değişimleri var mı?
+
+---
+
+BİR PROBLEM BULURSAN DURMA
+
+Bir hata bulursan:
+
+SADECE RAPOR ETME → DÜZELT.
+
+Düzeltmeden sonra ilgili kısmı tekrar izle.
+
+Yeni bir hata oluşmuşsa onu da düzelt.
+
+Bu döngüyü mümkün olduğunca:
+
+TEMİZ + SENKRONİZE + DİNAMİK + SİNEMATİK
+
+bir sonuç elde edene kadar devam ettir.
+
+---
+
+ÇALIŞMA DÖNGÜSÜ
+
+Temel süreç şu olmalı:
+
+VIDEO
+
+↓
+
+AUDIO EXTRACTION
+
+↓
+
+TIMESTAMPED TRANSCRIPTION
+
+↓
+
+STORY / VISUAL ANALYSIS
+
+↓
+
+SYNC
+
+↓
+
+REPETITION CLEANUP
+
+↓
+
+EDITING / PACING
+
+↓
+
+VOICE + MUSIC MIX
+
+↓
+
+FULL VIDEO REVIEW
+
+↓
+
+FIX
+
+↓
+
+REVIEW AGAIN
+
+↓
+
+FINAL VIDEO
+
+---
+
+ÇOK ÖNEMLİ
+
+İlk analizden sonra bana:
+
+“00:12'de sorun var, 00:25'te müzik yüksek.”
+
+gibi bir rapor verip DURMA.
+
+Asıl görev:
+
+ANALİZ → DÜZELT → TEKRAR İZLE → YENİDEN DÜZELT → FINAL KONTROL
+
+şeklinde ilerlemektir.
+
+---
+
+EĞER VİDEOYU DOĞRUDAN EDİTLEYEMİYORSAN
+
+Sadece teknik olarak video üzerinde değişiklik yapman mümkün değilse bana uygulanabilir bir edit decision list ver.
+
+Genel tavsiye verme.
+
+Timestamp'li kesin talimat ver.
+
+Örneğin:
+
+00:12:14–00:12:21
+
+Sorun:
+Görüntü voice-over'dan yaklaşık 3 saniye erken geliyor.
+
+Düzeltme:
+X klibini yaklaşık 3 saniye sağa kaydır. Önceki görüntüyü anlatının geçiş noktasına kadar uzat.
+
+---
+
+00:23:08–00:23:17
+
+Sorun:
+Müzik voice-over'daki bazı kelimeleri maskeliyor.
+
+Düzeltme:
+Müziği yalnızca konuşmanın netleşmesini sağlayacak kadar azalt. Dramatik enerjiyi koru. Gerekirse volume automation veya hafif dynamic EQ uygula.
+
+---
+
+00:31:40–00:31:56
+
+Sorun:
+Aynı anlatım yanlışlıkla iki kez kullanılmış.
+
+Düzeltme:
+İkinci tekrar olan 00:31:47–00:31:56 bölümünü kaldır ve iki tarafı doğal bir cut ile birleştir.
+
+---
+
+Yani bana:
+
+“Müzik biraz yüksek.”
+
+deme.
+
+Bunun yerine:
+
+nerede + neden + ne yapılması gerekiyor
+
+şeklinde doğrudan uygulanabilir karar ver.
+
+---
+
+DOSYA GÜVENLİĞİ
+
+Orijinal videoyu değiştirme.
+
+Orijinal dosyanın üzerine yazma.
+
+Timeline'ın orijinal versiyonunu koru.
+
+Yeni bir versiyon oluştur.
+
+Örneğin:
+
+"mitoloji_video_synced_v2"
+
+veya
+
+"mitoloji_video_final_mix_v2"
+
+Gerekirse ara sürümler oluştur.
+
+---
+
+FİNAL ÇIKTI
+
+İş bittikten sonra uzun bir teori veya uzun inceleme raporu verme.
+
+Kısaca şunları bildir:
+
+1. Kaç ses–görüntü senkron problemi düzeltildi?
+2. Kaç konuşma/görüntü tekrarı kaldırıldı?
+3. Kaç ses/müzik dengesi problemi düzeltildi?
+4. Kaç görsel yanlış karakter/olay nedeniyle değiştirildi?
+5. Eksik görüntü kaldıysa timestamp'leri nelerdir?
+6. Final kontrolden sonra hâlâ şüpheli görünen timestamp var mı?
+7. Oluşturulan final video/dosya adı nedir?
+
+Ayrıca timestamp'li transkript dosyasını da koru.
+
+---
+
+SON VE EN ÖNEMLİ TALİMAT
+
+Önceliğin rapor üretmek değildir.
+
+Önceliğin:
+
+mümkün olan en iyi final videoyu ortaya çıkarmaktır.
+
+Videonun:
+
+- görsel–işitsel olarak senkron,
+- anlatı açısından tutarlı,
+- gereksiz tekrarlardan arındırılmış,
+- ritmik olarak akıcı,
+- ses açısından temiz,
+- ancak tekdüze olmayan,
+- müziğin dramatik etkisini koruyan,
+- voice-over'ın her zaman anlaşılır kaldığı,
+- sinematik ve doğal
+
+bir final versiyonunu oluştur.
+
+Müzik sesi çiğnemesin; fakat sırf voice-over var diye müziğin dramatik gücünü de gereksiz yere öldürme.
+
+Son karar kriterin şu olsun:
+
+“Bir izleyici bu videoyu izlediğinde kurgu veya ses problemlerini fark etmek yerine hikâyeye kapılıyor mu?”
+
+Cevap evetse final versiyon hazırdır.
